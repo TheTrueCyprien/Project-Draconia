@@ -4,8 +4,9 @@ using System.Collections;
 public class CameraControll : MonoBehaviour {
 
 	public GameObject target;
-	public Vector3 offset = new Vector3(0,10,-20);
-	public float speed = 10f;
+	public Vector3 offset;
+	public float speed;
+	public float rotationSpeed;
 
 	private Camera camera;
 
@@ -29,7 +30,7 @@ public class CameraControll : MonoBehaviour {
 				targetAngle = cameraAngle;
 			}
 
-			targetAngle = Mathf.LerpAngle(cameraAngle, targetAngle, speed * Time.deltaTime);
+			targetAngle = Mathf.LerpAngle(cameraAngle, targetAngle, rotationSpeed * Time.deltaTime);
 			localOffset = Quaternion.Euler(0,targetAngle,0) * offset;
 
 			camera.transform.position = Vector3.Lerp(camera.transform.position, targetPos + localOffset, speed * Time.deltaTime);
